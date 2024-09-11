@@ -33,7 +33,7 @@ Jxls jars are available in the Central Maven repository.
 We need to add the following dependency to core Jxls module
 
     <dependency>
-        <groupId>org.jxls</groupId>
+        <groupId>org.jxls.fork</groupId>
         <artifactId>jxls</artifactId>
         <version>${jxlsVersion}</version>
     </dependency>
@@ -51,7 +51,7 @@ Currently Jxls supplies two implementations of this interface in separate module
 To use Apache POI API based transformer implementation add the following dependency
 
     <dependency>
-        <groupId>org.jxls</groupId>
+        <groupId>org.jxls.fork</groupId>
         <artifactId>jxls-poi</artifactId>
         <version>${jxlsPoiVersion}</version>
     </dependency>
@@ -59,7 +59,7 @@ To use Apache POI API based transformer implementation add the following depende
 To use Java Excel API based transformer implementation add the following dependency
 
     <dependency>
-        <groupId>org.jxls</groupId>
+        <groupId>org.jxls.fork</groupId>
         <artifactId>jxls-jexcel</artifactId>
         <version>${jxlsJexcelVersion}</version>
     </dependency>

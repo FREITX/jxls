@@ -61,7 +61,7 @@ Add Jxls as a Maven dependency to your project:
 
 ```
 <dependency>
-    <groupId>org.jxls</groupId>
+    <groupId>org.jxls.fork</groupId>
     <artifactId>jxls-poi</artifactId>
     <version>{{version}}</version>
 </dependency>

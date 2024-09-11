@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.beanutils2.BeanUtils;
 import org.jxls.logging.JxlsLogger;
 
 public class ObjectPropertyAccess {
@@ -70,7 +70,7 @@ public class ObjectPropertyAccess {
         if (obj instanceof Map<?,?> map) { // Map access
             return map.get(propertyName);
         } else { // DynaBean or Java bean access
-            return PropertyUtils.getProperty(obj, propertyName);
+            return BeanUtils.getProperty(obj, propertyName);
         }
     }
 }

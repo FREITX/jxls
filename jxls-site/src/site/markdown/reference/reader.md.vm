@@ -18,7 +18,7 @@ Maven dependency
 The latest Jxls Reader module was released to Central Maven repository and to use it you should add the following dependency in your pom.xml
 
     <dependency>
-        <groupId>org.jxls</groupId>
+        <groupId>org.jxls.fork</groupId>
         <artifactId>jxls-reader</artifactId>
         <version>${jxlsReaderVersion}</version>
     </dependency> 

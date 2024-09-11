@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.beanutils2.BeanUtils;
 import org.jxls.area.Area;
 import org.jxls.common.CellRef;
 import org.jxls.common.Context;
@@ -103,7 +103,7 @@ public class GridCommand extends AbstractCommand {
         if (formatCells == null) {
             return;
         }
-        List<String> cellStyleList = Arrays.asList(formatCells.split(","));
+        String[] cellStyleList = formatCells.split(",");
         for (String cellStyleString : cellStyleList) {
             String[] styleCell = cellStyleString.split(":");
             cellStyleMap.put(styleCell[0].trim(), styleCell[1].trim());
@@ -189,7 +189,7 @@ public class GridCommand extends AbstractCommand {
         }
         return rowObjectProps.stream().map(prop -> {
             try {
-                return PropertyUtils.getProperty(rowObject, prop);
+                return BeanUtils.getProperty(rowObject, prop);
             } catch (Exception e) {
                 throw new JxlsException("Failed to evaluate property " + prop + " of row object of class " + rowObject.getClass().getName(), e);
             }

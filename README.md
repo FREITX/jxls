@@ -16,7 +16,7 @@ Jxls uses a special markup in Excel templates to define output formatting and da
 
 ```
 <dependency>
-    <groupId>org.jxls</groupId>
+    <groupId>org.jxls.fork</groupId>
     <artifactId>jxls-poi</artifactId>
     <version>3.0.0</version>
 </dependency>

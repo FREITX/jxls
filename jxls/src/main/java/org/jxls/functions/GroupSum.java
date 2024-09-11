@@ -1,20 +1,20 @@
 package org.jxls.functions;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
-
-import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.beanutils2.PropertyUtils;
 import org.jxls.command.RunVar;
 import org.jxls.common.JxlsException;
 import org.jxls.common.NeedsPublicContext;
 import org.jxls.common.PublicContext;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
 /**
  * Group sum
  * <p>The sum function for calculation a group sum takes two arguments: the collection as JEXL expression (or its name as a String)
  * and the name (as String) of the attribute. The attribute can be a object property or a Map entry. The value type T can be of any
  * type and is implemented by a generic SummarizerBuilder.</p>
- * 
+ *
  * <h2>Example</h2>
  * <p>Add an instance of this class e.g. with name "G" to your Context.</p>
  * <pre>${G.sum("salary", employees.items)}</pre>
@@ -24,8 +24,7 @@ import org.jxls.common.PublicContext;
 public class GroupSum<T> implements NeedsPublicContext {
     private PublicContext context;
     private final SummarizerBuilder<T> sumBuilder;
-    private String objectVarName = "i";
-    
+
     public GroupSum(SummarizerBuilder<T> sumBuilder) {
         this.sumBuilder = sumBuilder;
     }
@@ -34,22 +33,22 @@ public class GroupSum<T> implements NeedsPublicContext {
     public void setPublicContext(PublicContext context) {
         this.context = context;
     }
-    
+
     /**
      * Returns the sum of the given field of all items.
-     * 
-     * @param fieldName name of the field of type T to be summed (without the loop var name!)
+     *
+     * @param fieldName  name of the field of type T to be summed (without the loop var name!)
      * @param expression JEXL expression as String, usually name of the Collection, often ends with ".items"
      * @return sum of type T
      */
     public T sum(String fieldName, String expression) {
         return sum(fieldName, getItems(expression));
     }
-    
+
     /**
      * Returns the sum of the given field of all items.
-     * 
-     * @param fieldName name of the field of type T to be summed (without the loop var name!)
+     *
+     * @param fieldName  name of the field of type T to be summed (without the loop var name!)
      * @param collection the collection; inside Excel file it's a JEXL expression
      * @return sum of type T
      */
@@ -61,20 +60,13 @@ public class GroupSum<T> implements NeedsPublicContext {
         return sum.getSum();
     }
 
-    public String getObjectVarName() {
-        return objectVarName;
-    }
-
-    public void setObjectVarName(String objectVarName) {
-        this.objectVarName = objectVarName;
-    }
-
     public T sum(String fieldName, String expression, String filter) {
         return sum(fieldName, getItems(expression), filter);
     }
-    
+
     public T sum(String fieldName, Iterable<Object> collection, String filter) {
         Summarizer<T> sum = sumBuilder.build();
+        String objectVarName = "i";
         try (RunVar runVar = new RunVar(objectVarName, context)) {
             for (Object object : collection) {
                 runVar.put(object);
@@ -87,7 +79,7 @@ public class GroupSum<T> implements NeedsPublicContext {
     }
 
     private Object getValue(Object i, String fieldName) {
-        if (i instanceof Map<?,?> map) {
+        if (i instanceof Map<?, ?> map) {
             if (!map.containsKey(fieldName)) {
                 throw new JxlsException("Attribute " + fieldName + " does not exist in collection element!");
             }
@@ -108,6 +100,7 @@ public class GroupSum<T> implements NeedsPublicContext {
         } else if (!(result instanceof Iterable)) {
             throw new ClassCastException(expression + " is not an Iterable!");
         }
+        //noinspection unchecked
         return (Iterable<Object>) result;
     }
 
